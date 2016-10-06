@@ -34,6 +34,27 @@ a {
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.3); }
 
+  .bbtn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 6px;
+    color: #159957;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #159957;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s; }
+    .bbtn + .bbtn {
+      margin-left: 1rem; }
+
+  .bbtn:hover {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    background-color: #72c19a;
+    border-color: #159957; }
+
+
 @media screen and (min-width: 64em) {
   .btn {
     padding: 0.75rem 1rem; } }
