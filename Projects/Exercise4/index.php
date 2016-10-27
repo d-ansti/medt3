@@ -6,7 +6,7 @@
   </head>
   <body>
 
-    <h1>Einfache Tetausgabe mit echo fresh</h1>
+    <h1>Einfache Textausgabe mit echo fresh</h1>
 
     <h2>Hello</h2>
 
@@ -44,6 +44,52 @@
 
     echo '<p style="color: tomato">String1:'.$myString1.'</p>';
 
+    ?>
+
+    <h1>Kontrollstrukturen</h1>
+    <?php
+    $myBool = true;
+      if ($myBool)
+        echo "<p>Yes, it is!</p>";
+      else
+        echo "<p>Nooooo!</p>";
+    ?>
+
+    <h2>Loops in Kombination mit Arrays</h2>
+
+    <?php
+      $myArray1 = array("Home", "Products", "About");
+      $myArray2 = ["Home", "Products", "About"];
+
+      echo "<ul>";
+
+      foreach ($myArray1 as $item) {
+        echo "<li>$item</li>";
+      }
+
+      echo "</ul><ul>";
+
+      for ($i=0; $i < sizeof($myArray2); $i++) {
+        echo "<li>".$myArray2[$i]."</li>";
+      }
+
+      echo "</ul>"
+    ?>
+
+    <h2>Assoziative Arrays</h2>
+
+    <?php
+      #              key => value    key => value
+      $myGETArray = ["vn"=>"Markus", "nn"=>"Brunner", "submitBtn"=>"Anmelden"];
+      #              Mit dem Key kann man den Wert auslesen!
+      if (isset($myGETArray)) {
+        echo "<p>Button: ".$myGETArray['submitBtn']."</p>";
+        echo "<ul>";
+        foreach ($myGETArray as $item) {
+          echo "<li>$item</li>";
+        }
+        echo "</ul>";
+      }
     ?>
 
   </body>
