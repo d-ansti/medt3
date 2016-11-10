@@ -92,5 +92,13 @@
       }
     ?>
 
+    <h1>Superglobals - $_SERVER</h1>
+    <?php
+        # var_dump($_SERVER);
+        echo "Client-Sprache: ".$_SERVER["HTTP_ACCEPT_LANGUAGE"];
+        echo "<br>";
+        echo "IP-Adresse: ".$_SERVER["REMOTE_ADDR"];
+    ?>
+
   </body>
 </html>
