@@ -6,7 +6,7 @@
   </head>
   <body>
 
-    <h1>Einfache Textausgabe mit echo fresh</h1>
+    <h1>Einfache Textausgabe mit echo</h1>
 
     <h2>Hello</h2>
 
