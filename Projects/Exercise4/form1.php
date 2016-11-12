@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>PHP Form Demo 1</title>
+    <title>PHP Form</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -16,50 +16,41 @@
   </head>
   <body>
     <div class="container">
-    <h1>Ohne Bootstrap</h1>
-
-    <form action="http://localhost/medt3/Projects/Exercise4/form1.php">
-      <h3>Anmeldeinfos bitte eingeben:</h3>
-      <p>Vorname: <input type="text" name="vn"></p>
-      <p>Nachname: <input type="text" name="nn"></p>
-      <p>Textfarbe: <input type="text" name="tf"></p>
-      <br>
-      <p><input type="submit" value="Anmelden" name="submitBtn"></p>
-    </form>
-
     <br>
-    <?php
-    if (isset($_GET['submitBtn'])) {
-      print_r($_GET); #Ausgabe des Array-Inhaltes
-      echo "<p style=\"color:".$_GET['tf']."\">Vorname: ".$_GET['vn']."</p>";
-      echo "<p style=\"color:".$_GET['tf']."\">Nachname: ".$_GET['nn']."</p>";
-    }
-    ?>
-    <br>
+    <h1>Anmeldedaten eingeben:</h1>
 
-    <h1>Mit Bootstrap</h1>
-
-    <h3>Anmeldeinfos bitte eingeben:</h3>
-    <form class="form-inline" action="http://localhost/medt3/Projects/Exercise4/form1.php">
+    <form>
   <div class="form-group">
-    <label for="text">Vorname:</label>
-    <input type="text" class="form-control" name="vn">
-  </div><br>
-  <div class="form-group">
-    <label for="text">Nachname:</label>
-    <input type="text" class="form-control" name="nn">
-  </div><br>
-  <div class="form-group">
-    <label for="text">Textfarbe:</label>
-    <input type="text" class="form-control" name="tf">
-  </div><br>
-  <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
+    <label for="firstname">Vorname</label>
+    <input type="text" class="form-control" name="vn" placeholder="Max">
   </div>
-  <br>
+  <div class="form-group">
+    <label for="lastname">Nachname</label>
+    <input type="text" class="form-control" name="nn" placeholder="Mustermann">
+  </div>
+  <div class="form-group">
+    <label for="textcolor">Textfarbe</label>
+    <input type="text" class="form-control" name="tf" placeholder="black">
+  </div>
+  <div class="form-group">
+    <label for="id">Identification (ID)</label>
+    <input type="number" class="form-control" name="id" placeholder="0">
+  </div>
   <button type="submit" class="btn btn-default" name="submitBtn">Submit</button>
 </form>
-
+<br>
+  <div class="jumbotron" style="background-color: lightblue">
+<?php
+if (isset($_GET['submitBtn'])) {
+  #print_r($_GET); #Ausgabe des Array-Inhaltes
+  echo "<p style=\"color:".$_GET['tf']."\">Vorname: ".$_GET['vn']."</p>";
+  echo "<p style=\"color:".$_GET['tf']."\">Nachname: ".$_GET['nn']."</p>";
+  echo "<p style=\"color:".$_GET['tf']."\">ID: ".$_GET['id']."</p>";
+}
+?>
+  </div>
+  <a href="form1.php" class="btn btn-default" role="button">Reset</a>
+<br>
   </div>
   </body>
 </html>
