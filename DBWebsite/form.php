@@ -29,10 +29,6 @@
     <input type="text" class="form-control" name="nn" placeholder="Mustermann">
   </div>
   <div class="form-group">
-    <label for="textcolor">Textfarbe</label>
-    <input type="text" class="form-control" name="tf" placeholder="black">
-  </div>
-  <div class="form-group">
     <label for="id">Identification (ID)</label>
     <input type="number" class="form-control" name="id" placeholder="001 - 999">
   </div>
@@ -42,85 +38,65 @@
 <?php
 if (isset($_GET['submitBtn'])) {
   print_r($_GET); #Ausgabe des Array-Inhaltes
-  echo "<p style=\"color:".$_GET['tf']."\">Vorname: ".$_GET['vn']."</p>";
-  echo "<p style=\"color:".$_GET['tf']."\">Nachname: ".$_GET['nn']."</p>";
 }
 ?>
-<br>
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$link = mysql_connect('localhost', 'root', '');
+<br><br>
+
+<?php // MYSQL Improved (mysqli)
+
+// variables
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'test';
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$con = mysqli_connect($servername,$username,$password,$database);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "Connected successfully"."<br>";
+// Check if server is alive
+if (mysqli_ping($con)) {
+  echo "<p>Connected successfully to <strong>".mysqli_get_host_info($con)."</strong> and database <strong>".$database."</strong></p>";
+  }
+else {
+  echo "Error: ". mysqli_error($con);
+  }
 
-// benutze Datenbank
-mysql_select_db('classicmodels', $link);
+// Select
+$sql = "SELECT * FROM customers";
 
-echo "<br>";
-
-// SELECT
-// Formuliere Abfrage
-$query = sprintf("SELECT * FROM customers");
-
-// Führe Abfrage aus
-$result = mysql_query($query);
-
-// falls fehler auftritt:
-if (!$result) {
-    $message  = 'Ungültige Abfrage: ' . mysql_error() . "\n";
-    $message .= 'Gesamte Abfrage: ' . $query;
-    die($message);
-}
-
-// Ausgabe
-#while ($row = mysql_fetch_assoc($result)) {
-#    echo $row['customerName'];
-#    echo "<br>";
-#}
+// Print
+$result = mysqli_query($con,$sql);
 
 // Ausgabe mit Tabellen
 ?>
+
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>customerNumber</th>
-      <th>customerName</th>
-      <th>contactLastName</th>
+      <th>ID</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
     </tr>
   </thead>
   <tbody>
 
 <?php
-while ($row = mysql_fetch_assoc($result)) {
+while ($fdg = mysqli_fetch_assoc($result)) {
   echo "<tr>";
   echo "<td>";
-  echo $row['customerNumber'];
+  echo $fdg['id'];
   echo "</td>";
   echo "<td>";
-  echo $row['customerName'];
+  echo $fdg['firstName'];
   echo "</td>";
   echo "<td>";
-  echo $row['contactLastName'];
+  echo $fdg['lastName'];
   echo "</td>";
   echo "</tr>";
 }
-?>
 
-  </tbody>
-</table>
-<?php
-
-// Close the connection
-$conn->close();
+// Close connection
+mysqli_close($con);
 ?>
 
   </div>
