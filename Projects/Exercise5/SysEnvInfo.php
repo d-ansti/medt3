@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>SysEnvInfo</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -15,9 +15,11 @@
 
   </head>
   <body>
-    <br>
     <div class="container">
-    <table class="table table-bordered">
+    <div class="page-header">
+      <h1>$_SERVER <small>im Überblick</small></h1>
+    </div>
+    <table class="table table-bordered table-hover">
       <thead>
         <tr>
           <th>Variable</th>
@@ -27,44 +29,22 @@
       <tbody>
 
     <?php
-      echo "<tr>"."<td>";
-      echo 'Skript-Pfad';
-      echo "</td>";
-      echo "<td>";
-      echo $_SERVER['PHP_SELF'];
-      echo "</td>"."</tr>";
-      echo "<tr>"."<td>";
-      echo 'Server-Name / IP';
-      echo "</td>";
-      echo "<td>";
-      echo $_SERVER['SERVER_NAME'];
-      echo " / ";
-      echo $_SERVER['SERVER_ADDR'];
-      echo "</td>"."</tr>";
-      echo "<tr>"."<td>";
-      echo 'Protokoll';
-      echo "</td>";
-      echo "<td>";
-      echo $_SERVER['SERVER_PROTOCOL'];
-      echo "</td>"."</tr>";
-      echo "<tr>"."<td>";
-      echo 'Client-IP';
-      echo "</td>";
-      echo "<td>";
-      echo $_SERVER['REMOTE_ADDR'];
-      echo "</td>"."</tr>";
-      echo "<tr>"."<td>";
-      echo 'URI';
-      echo "</td>";
-      echo "<td>";
-      echo $_SERVER['REQUEST_URI'];
-      echo "</td>"."</tr>";
-      echo "<tr>"."<td>";
-      echo 'Server-Info';
-      echo "</td>";
-      echo "<td>";
-      echo $_SERVER['SERVER_SOFTWARE'];
-      echo "</td>"."</tr>";
+function PrintValues($variable, $value)
+{
+  echo "<tr>"."<td>";
+  echo "$variable";
+  echo "</td>";
+  echo "<td>";
+  echo $_SERVER[$value];
+  echo "</td>"."</tr>";
+}
+
+PrintValues('Skript-Pfad','PHP_SELF');
+PrintValues('Server-Name / IP','SERVER_NAME');
+PrintValues('Protokoll','SERVER_PROTOCOL');
+PrintValues('Client-IP','REMOTE_ADDR');
+PrintValues('URI','REQUEST_URI');
+PrintValues('Server-Info','SERVER_SOFTWARE');
     ?>
 
       </tbody>
