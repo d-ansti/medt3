@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Sample Database</title>
+    <title>Sample</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -15,49 +15,34 @@
 
   </head>
   <body>
-<br>
     <div class="container">
+      <br>
       <div class="jumbotron">
-<br>
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$link = mysql_connect('localhost', 'root', '');
+
+<?php // MYSQL Improved (mysqli)
+
+// variables
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'classicmodels';
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$con = mysqli_connect($servername,$username,$password,$database);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "<p>Connected successfully to: <strong>".$servername."</strong></p>";
+// Check if server is alive
+if (mysqli_ping($con)) {
+  echo "<p>Connected successfully to <strong>".mysqli_get_host_info($con)."</strong> and database <strong>".$database."</strong></p>";
+  }
+else {
+  echo "Error: ". mysqli_error($con);
+  }
 
-// benutze Datenbank
-$selectedDB = 'classicmodels';
-mysql_select_db($selectedDB, $link);
-echo "<p>Connected successfully to DB: <strong>".$selectedDB."</strong></p>";
+// Select
+$sql = "SELECT * FROM customers";
 
-// SELECT
-// Formuliere Abfrage
-$query = sprintf("SELECT * FROM customers");
-
-// Führe Abfrage aus
-$result = mysql_query($query);
-
-// falls fehler auftritt:
-if (!$result) {
-    $message  = 'Ungültige Abfrage: ' . mysql_error() . "\n";
-    $message .= 'Gesamte Abfrage: ' . $query;
-    die($message);
-}
-
-// Ausgabe
-#while ($row = mysql_fetch_assoc($result)) {
-#    echo $row['customerName'];
-#    echo "<br>";
-#}
+// Print
+$result = mysqli_query($con,$sql);
 
 // Ausgabe mit Tabellen
 ?>
@@ -75,32 +60,26 @@ if (!$result) {
   <tbody>
 
 <?php
-while ($row = mysql_fetch_assoc($result)) {
+while ($fdg = mysqli_fetch_assoc($result)) {
   echo "<tr>";
   echo "<td>";
-  echo $row['customerNumber'];
+  echo $fdg['customerNumber'];
   echo "</td>";
   echo "<td>";
-  echo $row['customerName'];
+  echo $fdg['customerName'];
   echo "</td>";
   echo "<td>";
-  echo $row['contactLastName'];
+  echo $fdg['contactLastName'];
   echo "</td>";
   echo "<td>";
-  echo $row['contactFirstName'];
+  echo $fdg['contactFirstName'];
   echo "</td>";
   echo "</tr>";
 }
+
+// Close connection
+mysqli_close($con);
 ?>
 
-  </tbody>
-</table>
-<?php
-
-// Close the connection
-$conn->close();
-?>
-
-  </div>
   </body>
 </html>
