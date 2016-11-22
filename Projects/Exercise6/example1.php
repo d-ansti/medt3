@@ -20,7 +20,7 @@
 			<form>
 			  <div class="form-group">
 			    <label for="input">Ihre Eingabe: </label>
-			    <input type="text" class="form-control" name="input" placeholder="Das ist ein Demo-Satz">
+			    <input type="text" class="form-control" name="input" value="Das ist ein Demo-Satz">
 			  </div>
 			  <button type="submit" class="btn btn-default" name="submitBtn">Explode</button>
 			  <button class="btn btn-default" href="example1.php">Reset</button>
