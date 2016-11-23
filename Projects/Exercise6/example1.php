@@ -17,30 +17,37 @@
 	<body>
 		<div class="container">
 			<h1>Beispiel 1</h1>
-			<form>
+			<form method="post">
 			  <div class="form-group">
 			    <label for="input">Ihre Eingabe: </label>
-			    <input type="text" class="form-control" name="input" value="Das ist ein Demo-Satz">
+			    <input type="text" class="form-control" name="input" placeholder="Das ist ein Demo-Satz">
 			  </div>
 			  <button type="submit" class="btn btn-default" name="submitBtn">Explode</button>
-			  <button class="btn btn-default" href="example1.php">Reset</button>
+			  <button class="btn btn-default">Reset</button>
 			</form><br>
 			<table class="table table-striped">
 		    <tbody>
 <?php
-if (isset($_GET['submitBtn'])) {
-	$input = $_GET['input'];
+if (isset($_POST['submitBtn'])) {
+	$input = $_POST['input'];
 	$exinput = explode(" ", $input);
-	PrintInput($exinput);
+	PrintInput($exinput, $input);
 }
 
-function PrintInput($exinput)
+function PrintInput($exinput, $input)
 {
-	echo "<h3>Ihre Eingabe als Liste:</h3>";
-	foreach ($exinput as $item) {
-		echo "<tr><td>".$item."</td></tr>";
-}
-}
+	if ($input == "") {
+		echo "<h3>Keine Eingabe!";
+	}
+	else {
+		echo "<h3>Ihre Eingabe als Liste:</h3>";
+		echo "<ul>";
+			foreach ($exinput as $item) {
+				echo "<tr><td><li>".$item."</li></td></tr>";
+		}
+			echo "</ul>";
+		}
+	}
 ?>
 		    </tbody>
 		  </table>
