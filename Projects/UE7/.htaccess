@@ -1,9 +1,5 @@
 #https notwendig
 AuthType Basic
 AuthName "Password Protected Area"
-<<<<<<< HEAD
 AuthUserFile ../htdocs/medt3/Projects/UE7/.htpasswd
-=======
-AuthUserFile /Applications/XAMPP/xamppfiles/apache2/htpass/.htpasswd
->>>>>>> parent of 1cf1322... Changed
 Require valid-user
