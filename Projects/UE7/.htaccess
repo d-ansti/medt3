@@ -1,0 +1,5 @@
+#https notwendig
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile /Applications/XAMPP/xamppfiles/apache2/htpass/.htpasswd
+Require valid-user
