@@ -1,5 +1,5 @@
 #https notwendig
 AuthType Basic
 AuthName "Password Protected Area"
-AuthUserFile /Applications/XAMPP/xamppfiles/apache2/htpass/.htpasswd
+AuthUserFile ..\htdocs\medt3\Projects\UE7\.htpasswd
 Require valid-user
