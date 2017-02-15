@@ -1,5 +1,5 @@
 #https notwendig
 AuthType Basic
 AuthName "Password Protected Area"
-AuthUserFile ..\htdocs\medt3\Projects\UE7\.htpasswd
+AuthUserFile ../htdocs/medt3/Projects/UE7/.htpasswd
 Require valid-user
