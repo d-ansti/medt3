@@ -1,5 +1,8 @@
-#https notwendig
 AuthType Basic
 AuthName "Password Protected Area"
 AuthUserFile ../htdocs/medt3/Projects/UE7/.htpasswd
 Require valid-user
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteRule ^(.*)$ dbaccess.php [NC,L]
+</IfModule>
