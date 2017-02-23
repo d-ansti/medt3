@@ -29,19 +29,79 @@ $pwd = '';
 // Establish & check connection
 try {
    $db = new PDO ( "mysql:host=$host;dbname=$dbname", $user, $pwd);
-   echo "<h1>Connected successfully to database $dbname</h1>";
+   echo "<h1>Connected successfully to database $dbname</h1><hr>";
 } catch (PDOException $e) {
    echo "<h1>Error: " . $e->getMessage()."</h1>";
    die();
 }
+
+// INSERT Statement
+echo "<p><a href=\"dbaccess.php?insert\"><button type=\"button\" class=\"btn btn-default\">Insert</button></a>";
+
+if (isset($_GET['insert'])) {
+  $ins = "
+    USE medt3;
+    DROP TABLE IF EXISTS project;
+    CREATE TABLE project (id INTEGER NOT NULL auto_increment, name varchar(255) NOT NULL, description text, createDate DATETIME NOT NULL, PRIMARY KEY (id));
+    INSERT INTO project (name, description, createDate) VALUES ('Demo App A','Some text','2014-02-10 12:00:00'), ('Demo App B','Some text text','2014-02-10 12:01:00'), ('Demo App C','Some text text text','2014-02-10 12:02:00'), ('Demo App D','Some text text text text','2014-02-07 12:02:00'), ('Demo App E','Some text text text text text','2014-02-09 11:02:00'), ('Demo App F','Some text','2014-02-10 12:00:00'), ('Demo App G','Some text text','2014-02-10 12:01:00'), ('Demo App H','Some text text text','2014-02-10 12:02:00'), ('Demo App I','Some text text text text','2014-02-07 12:02:00');
+  ";
+  $db->exec($ins);
+}
+echo "</p>";
+
+// DELETE Statement
+if (isset($_GET['delete'])) {
+  $del = "DELETE FROM project WHERE id = ".$_GET['delete'];
+  $db->exec($del);
+}
+
+// UPDATE Statement
+if (isset($_GET['change'])) {
+  $chg = "UPDATE project SET name='TEST', description='TEST', createDate='2014-02-10 12:00:00' WHERE id = ".$_GET['change'];
+  $db->exec($chg);
+
+  $name;
+  $description;
+  $createDate;
+}
+?>
+<h2>Projekt bearbeiten</h2>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" value="name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">Description</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="desc" value="description">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">Date</label>
+    <div class="col-sm-10">
+      <input type="datetime-local" class="form-control" id="date" value="2014-02-10 12:00:00">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-success">Aktualisieren</button>
+      <button type="button" class="btn btn-danger">Abbrechen</button>
+    </div>
+  </div>
+</form>
+<br>
+<?php
 
 // SELECT Statement
 $sql = "SELECT * FROM project";
 $res = $db->query($sql);
 $tmp = $res->fetchAll(PDO::FETCH_OBJ);
 
+// Show Table
 ?>
-<hr>
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -53,11 +113,8 @@ $tmp = $res->fetchAll(PDO::FETCH_OBJ);
     </tr>
   </thead>
   <tbody>
-
 <?php
 
-
-// Show Table
 foreach ($tmp as $row) {
   echo "<tr>";
   echo "<td>" . $row->id . "</td>";
@@ -72,43 +129,6 @@ foreach ($tmp as $row) {
 
   echo "</tr>";
 }
-
-// INSERT Statement
-echo "<p><a href=\"dbaccess.php?insert\"><button type=\"button\" class=\"btn btn-default\">Insert</button></a>";
-
-if (isset($_GET['insert'])) {
-  $ins = "
-USE medt3;
-DROP TABLE IF EXISTS project;
-CREATE TABLE project (
-	id INTEGER NOT NULL auto_increment,
-	name varchar(255) NOT NULL,
-	description text,
-	createDate DATETIME NOT NULL,
-	PRIMARY KEY (id)
-);
-INSERT INTO project (name, description, createDate) VALUES
-	('Demo App A','Some text','2014-02-10 12:00:00'),
-	('Demo App B','Some text text','2014-02-10 12:01:00'),
-	('Demo App C','Some text text text','2014-02-10 12:02:00'),
-	('Demo App D','Some text text text text','2014-02-07 12:02:00'),
-	('Demo App E','Some text text text text text','2014-02-09 11:02:00'),
-	('Demo App F','Some text','2014-02-10 12:00:00'),
-	('Demo App G','Some text text','2014-02-10 12:01:00'),
-	('Demo App H','Some text text text','2014-02-10 12:02:00'),
-	('Demo App I','Some text text text text','2014-02-07 12:02:00');";
-  $db->exec($ins);
-  header("refresh: 0; url=inserted_all");
-} echo "</p>";
-
-// DELETE Statement
-if (isset($_GET['delete'])) {
-  $del = "DELETE FROM project WHERE id = ".$_GET['delete'];
-  $db->exec($del);
-  header("refresh: 0; url=element_deleted");
-}
-
-// UPDATE Statement
 
 // Show RewriteRule
 /*
