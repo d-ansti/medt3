@@ -42,7 +42,7 @@ $tmp = $res->fetchAll(PDO::FETCH_OBJ);
 
 ?>
 <hr>
-<table class="table table-bordered">
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th>id</th>
