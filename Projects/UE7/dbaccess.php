@@ -57,44 +57,50 @@ if (isset($_GET['delete'])) {
 
 // UPDATE Statement
 if (isset($_GET['change'])) {
+  $sql = "SELECT * FROM project WHERE id = ".$_GET['change'];
+  $res = $db->query($sql);
+  $tmp = $res->fetch(PDO::FETCH_OBJ);
+
 ?>
 
 <h2>Projekt bearbeiten</h2>
-<form class="form-horizontal">
+<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>">
   <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Name</label>
+    <label class="control-label col-sm-2">Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="name" value="name">
+      <input type="text" class="form-control" name="name" value="<?php echo $tmp->name; ?>">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="pwd">Description</label>
+    <label class="control-label col-sm-2">Description</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="desc" value="description">
+      <input type="text" class="form-control" name="desc" value="<?php echo $tmp->description; ?>">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="pwd">Date</label>
+    <label class="control-label col-sm-2">Date</label>
     <div class="col-sm-10">
-      <input type="datetime-local" class="form-control" id="date" value="2014-02-10 12:00:00">
+      <input type="text" class="form-control" name="date" value="<?php echo $tmp->createDate; ?>">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-success">Aktualisieren</button>
-      <button type="button" class="btn btn-danger">Abbrechen</button>
+      <button type="submit" name="absorb" value="<?php echo $_GET['change']; ?>" class="btn btn-success">Aktualisieren</button>
+      <button type="cancel" class="btn btn-danger">Abbrechen</button>
     </div>
   </div>
 </form>
 <br>
 
 <?php
-  $chg = "UPDATE project SET name='TEST', description='TEST', createDate='2014-02-10 12:00:00' WHERE id = ".$_GET['change'];
-  $db->exec($chg);
+}
 
-  $name;
-  $description;
-  $createDate;
+if (isset($_GET['absorb'])) {
+  $name = $_GET['name'];
+  $desc = $_GET['desc'];
+  $date = $_GET['date'];
+  $chg = "UPDATE project SET name='$name', description='$desc', createDate='$date' WHERE id = ".$_GET['absorb'];
+  $db->query($chg);
 }
 
 // SELECT Statement
