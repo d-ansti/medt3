@@ -57,14 +57,8 @@ if (isset($_GET['delete'])) {
 
 // UPDATE Statement
 if (isset($_GET['change'])) {
-  $chg = "UPDATE project SET name='TEST', description='TEST', createDate='2014-02-10 12:00:00' WHERE id = ".$_GET['change'];
-  $db->exec($chg);
-
-  $name;
-  $description;
-  $createDate;
-}
 ?>
+
 <h2>Projekt bearbeiten</h2>
 <form class="form-horizontal">
   <div class="form-group">
@@ -93,7 +87,15 @@ if (isset($_GET['change'])) {
   </div>
 </form>
 <br>
+
 <?php
+  $chg = "UPDATE project SET name='TEST', description='TEST', createDate='2014-02-10 12:00:00' WHERE id = ".$_GET['change'];
+  $db->exec($chg);
+
+  $name;
+  $description;
+  $createDate;
+}
 
 // SELECT Statement
 $sql = "SELECT * FROM project";
