@@ -28,7 +28,7 @@ $pwd = '';
 
 // Establish & check connection
 try {
-   $db = new PDO ( "mysql:host=$host;dbname=$dbname", $user, $pwd);
+   $db = new PDO ("mysql:host=$host;dbname=$dbname", $user, $pwd);
    echo "<h1>Connected successfully to database $dbname</h1><hr>";
 } catch (PDOException $e) {
    echo "<h1>Error: " . $e->getMessage()."</h1>";
@@ -36,14 +36,14 @@ try {
 }
 
 // INSERT Statement
-echo "<p><a href=\"dbaccess.php?insert\"><button type=\"button\" class=\"btn btn-default\">Insert</button></a>";
+echo "<p><a href=\"?insert\"><button type=\"button\" class=\"btn btn-default\">Insert</button></a>";
 
 if (isset($_GET['insert'])) {
   $ins = "
     USE medt3;
     DROP TABLE IF EXISTS project;
     CREATE TABLE project (id INTEGER NOT NULL auto_increment, name varchar(255) NOT NULL, description text, createDate DATETIME NOT NULL, PRIMARY KEY (id));
-    INSERT INTO project (name, description, createDate) VALUES ('Demo App A','Some text','2014-02-10 12:00:00'), ('Demo App B','Some text text','2014-02-10 12:01:00'), ('Demo App C','Some text text text','2014-02-10 12:02:00'), ('Demo App D','Some text text text text','2014-02-07 12:02:00'), ('Demo App E','Some text text text text text','2014-02-09 11:02:00'), ('Demo App F','Some text','2014-02-10 12:00:00'), ('Demo App G','Some text text','2014-02-10 12:01:00'), ('Demo App H','Some text text text','2014-02-10 12:02:00'), ('Demo App I','Some text text text text','2014-02-07 12:02:00');
+    INSERT INTO project (name, description, createDate) VALUES ('Demo App A','Some text','2014-02-10 12:00:00'), ('Demo App B','Some text text','2014-02-10 12:01:00'), ('Demo App C','Some text text text','2014-02-10 12:02:00'), ('Demo App D','Some text text text text','2014-02-07 12:02:00'), ('Demo App E','Some text text text text text','2014-02-09 11:02:00'), ('Demo App F','Some text','2014-02-10 12:00:00'), ('Demo App G','Some text text','2014-02-10 12:01:00'), ('Demo App H','Some text text text','2014-02-10 12:02:00'), ('Demo App I','Some text text text text','2014-02-07 12:02:00'), ('Demo App A','Some text','2014-02-10 12:00:00'), ('Demo App B','Some text text','2014-02-10 12:01:00'), ('Demo App C','Some text text text','2014-02-10 12:02:00'), ('Demo App D','Some text text text text','2014-02-07 12:02:00'), ('Demo App E','Some text text text text text','2014-02-09 11:02:00'), ('Demo App F','Some text','2014-02-10 12:00:00'), ('Demo App G','Some text text','2014-02-10 12:01:00'), ('Demo App H','Some text text text','2014-02-10 12:02:00'), ('Demo App I','Some text text text text','2014-02-07 12:02:00'), ('Demo App A','Some text','2014-02-10 12:00:00'), ('Demo App B','Some text text','2014-02-10 12:01:00'), ('Demo App C','Some text text text','2014-02-10 12:02:00'), ('Demo App D','Some text text text text','2014-02-07 12:02:00'), ('Demo App E','Some text text text text text','2014-02-09 11:02:00'), ('Demo App F','Some text','2014-02-10 12:00:00'), ('Demo App G','Some text text','2014-02-10 12:01:00'), ('Demo App H','Some text text text','2014-02-10 12:02:00'), ('Demo App I','Some text text text text','2014-02-07 12:02:00'), ('Demo App A','Some text','2014-02-10 12:00:00'), ('Demo App B','Some text text','2014-02-10 12:01:00'), ('Demo App C','Some text text text','2014-02-10 12:02:00'), ('Demo App D','Some text text text text','2014-02-07 12:02:00'), ('Demo App E','Some text text text text text','2014-02-09 11:02:00'), ('Demo App F','Some text','2014-02-10 12:00:00'), ('Demo App G','Some text text','2014-02-10 12:01:00'), ('Demo App H','Some text text text','2014-02-10 12:02:00'), ('Demo App I','Some text text text text','2014-02-07 12:02:00'), ('Demo App A','Some text','2014-02-10 12:00:00'), ('Demo App B','Some text text','2014-02-10 12:01:00'), ('Demo App C','Some text text text','2014-02-10 12:02:00'), ('Demo App D','Some text text text text','2014-02-07 12:02:00'), ('Demo App E','Some text text text text text','2014-02-09 11:02:00'), ('Demo App F','Some text','2014-02-10 12:00:00'), ('Demo App G','Some text text','2014-02-10 12:01:00'), ('Demo App H','Some text text text','2014-02-10 12:02:00'), ('Demo App I','Some text text text text','2014-02-07 12:02:00'), ('Demo App A','Some text','2014-02-10 12:00:00'), ('Demo App B','Some text text','2014-02-10 12:01:00'), ('Demo App C','Some text text text','2014-02-10 12:02:00'), ('Demo App D','Some text text text text','2014-02-07 12:02:00'), ('Demo App E','Some text text text text text','2014-02-09 11:02:00'), ('Demo App F','Some text','2014-02-10 12:00:00'), ('Demo App G','Some text text','2014-02-10 12:01:00'), ('Demo App H','Some text text text','2014-02-10 12:02:00'), ('Demo App I','Some text text text text','2014-02-07 12:02:00');
   ";
   $db->exec($ins);
 }
@@ -64,7 +64,7 @@ if (isset($_GET['change'])) {
 ?>
 
 <h2>Projekt bearbeiten</h2>
-<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<form class="form-horizontal" action="">
   <div class="form-group">
     <label class="control-label col-sm-2">Name</label>
     <div class="col-sm-10">
@@ -85,7 +85,7 @@ if (isset($_GET['change'])) {
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" name="absorb" value="<?php echo $_GET['change']; ?>" class="btn btn-success">Aktualisieren</button>
+      <button type="submit" name="changed" value="<?php echo $_GET['change']; ?>" class="btn btn-success">Aktualisieren</button>
       <button type="cancel" class="btn btn-danger">Abbrechen</button>
     </div>
   </div>
@@ -95,11 +95,11 @@ if (isset($_GET['change'])) {
 <?php
 }
 
-if (isset($_GET['absorb'])) {
+if (isset($_GET['changed'])) {
   $name = $_GET['name'];
   $desc = $_GET['desc'];
   $date = $_GET['date'];
-  $chg = "UPDATE project SET name='$name', description='$desc', createDate='$date' WHERE id = ".$_GET['absorb'];
+  $chg = "UPDATE project SET name='$name', description='$desc', createDate='$date' WHERE id = ".$_GET['changed'];
   $db->query($chg);
 }
 
@@ -109,8 +109,7 @@ $res = $db->query($sql);
 $tmp = $res->fetchAll(PDO::FETCH_OBJ);
 
 // Show Table
-?>
-<table class="table table-bordered table-hover">
+echo "<table class=\"table table-bordered table-hover\">
   <thead>
     <tr>
       <th>id</th>
@@ -120,35 +119,33 @@ $tmp = $res->fetchAll(PDO::FETCH_OBJ);
       <th>operations</th>
     </tr>
   </thead>
-  <tbody>
-<?php
+  <tbody>";
 
+$items = 0;
 foreach ($tmp as $row) {
-  echo "<tr>";
-  echo "<td>" . $row->id . "</td>";
-  echo "<td>" . $row->name . "</td>";
-  echo "<td>" . $row->description . "</td>";
-  echo "<td>" . $row->createDate . "</td>";
-  echo "<td>
-    <a href=\"dbaccess.php?change=$row->id\"><span class=\"glyphicon glyphicon-pencil\"></span>
-    <a href=\"dbaccess.php?delete=$row->id\"><span class=\"glyphicon glyphicon-trash\"></span>
+  echo "<tr>
+  <td>" . $row->id . "</td>
+  <td>" . $row->name . "</td>
+  <td>" . $row->description . "</td>
+  <td>" . $row->createDate . "</td>
+  <td>
+    <a href=\"?change=$row->id\"><span class=\"glyphicon glyphicon-pencil\"></span>
+    <a href=\"?delete=$row->id\"><span class=\"glyphicon glyphicon-trash\"></span>
   </td>";
-
-
+  $items += 1;
   echo "</tr>";
 }
+  $page = intval($items / 20);
+      echo "<nav aria-label=\"Page navigation\">
+        <ul class=\"pagination\">
+        <li class=\"page-item\"><a class=\"page-link\" href=\"?page=prev\"><</a></li>";
+        for ($i=1; $i <= $page; $i++) {
+          echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?page=$i\">$i</a></li>";
+        }
+      echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?page=next\">></a></li>
+      </ul></nav>";
 
-// Show RewriteRule
-/*
-echo $_SERVER['REQUEST_URI'];
-echo "<br> GET:";
-var_dump($_GET);
-echo "<br> POST:";
-var_dump($_POST);
-echo "<br>";
-*/
 ?>
-
     </div>
   </body>
 </html>
