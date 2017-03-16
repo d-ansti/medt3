@@ -138,11 +138,13 @@ foreach ($tmp as $row) {
   $page = intval($items / 20);
       echo "<nav aria-label=\"Page navigation\">
         <ul class=\"pagination\">
+        <li class=\"page-item\"><a class=\"page-link\" href=\"?page=first\"><<</a></li>
         <li class=\"page-item\"><a class=\"page-link\" href=\"?page=prev\"><</a></li>";
         for ($i=1; $i <= $page; $i++) {
           echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?page=$i\">$i</a></li>";
         }
       echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?page=next\">></a></li>
+      <li class=\"page-item\"><a class=\"page-link\" href=\"?page=last\">>></a></li>
       </ul></nav>";
 
 ?>
