@@ -60,39 +60,7 @@ if (isset($_GET['change'])) {
   $sql = "SELECT * FROM project WHERE id = ".$_GET['change'];
   $res = $db->query($sql);
   $tmp = $res->fetch(PDO::FETCH_OBJ);
-
-?>
-
-<h2>Projekt bearbeiten</h2>
-<form class="form-horizontal" action="dbaccess.php">
-  <div class="form-group">
-    <label class="control-label col-sm-2">Name</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="name" value="<?php echo $tmp->name; ?>">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2">Description</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="desc" value="<?php echo $tmp->description; ?>">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2">Date</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="date" value="<?php echo $tmp->createDate; ?>">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" name="changed" value="<?php echo $_GET['change']; ?>" class="btn btn-success">Aktualisieren</button>
-      <button type="cancel" class="btn btn-danger">Abbrechen</button>
-    </div>
-  </div>
-</form>
-<br>
-
-<?php
+  PrintForm($tmp);
 }
 
 if (isset($_GET['changed'])) {
@@ -100,6 +68,22 @@ if (isset($_GET['changed'])) {
   $desc = $_GET['desc'];
   $date = $_GET['date'];
   $chg = "UPDATE project SET name='$name', description='$desc', createDate='$date' WHERE id = ".$_GET['changed'];
+  $db->query($chg);
+}
+
+// INSERT Statement
+echo "<p><a href=\"dbaccess.php?new\"><button type=\"button\" class=\"btn btn-default\">Create Project</button></a>";
+
+if (isset($_GET['new'])) {
+  $tmp = "";
+  PrintForm($tmp);
+}
+
+if (isset($_GET['add'])) {
+  $name = $_GET['name'];
+  $desc = $_GET['desc'];
+  $date = $_GET['date'];
+  $chg = "INSERT INTO project (name, description, createDate) VALUES ('$name', '$desc', '$date')";
   $db->query($chg);
 }
 
@@ -134,6 +118,48 @@ foreach ($tmp as $row) {
   </td>";
   $items += 1;
   echo "</tr>";
+}
+
+// Print Form
+function PrintForm($tmp)
+{
+?>
+
+<h2>Projekt bearbeiten</h2>
+<form class="form-horizontal" action="dbaccess.php">
+  <div class="form-group">
+    <label class="control-label col-sm-2">Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="name" value="<?php if (isset($_GET['change'])) echo $tmp->name; ?>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Description</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="desc" value="<?php if (isset($_GET['change'])) echo $tmp->description; ?>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Date</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="date" value="<?php if (isset($_GET['change'])) echo $tmp->createDate; ?>">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <?php
+      if (isset($_GET['change']))
+        echo "<button type=\"submit\" name=\"changed\" value=\"".$_GET['change']."\" class=\"btn btn-success\">Aktualisieren</button>";
+      if (isset($_GET['new']))
+        echo "<button type=\"submit\" name=\"add\" value=\"".$_GET['new']."\" class=\"btn btn-success\">Erstellen</button>";
+      ?>
+      <button type="cancel" class="btn btn-danger">Abbrechen</button>
+    </div>
+  </div>
+</form>
+<br>
+
+<?php
 }
 
 // Pagination
