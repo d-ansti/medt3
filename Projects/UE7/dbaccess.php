@@ -35,9 +35,11 @@ try {
    die();
 }
 
-// INSERT Statement
-echo "<p><a href=\"dbaccess.php?insert\"><button type=\"button\" class=\"btn btn-default\">Insert</button></a>";
+// Buttons
+echo "<p><a href=\"dbaccess.php?insert\"><button type=\"button\" class=\"btn btn-default\">Renew Table</button></a> ";
+echo "<a href=\"dbaccess.php?new\"><button type=\"button\" class=\"btn btn-default\">Create Project</button></a></p><hr>";
 
+// Renew Table
 if (isset($_GET['insert'])) {
   $ins = "
     USE medt3;
@@ -72,8 +74,6 @@ if (isset($_GET['changed'])) {
 }
 
 // INSERT Statement
-echo "<p><a href=\"dbaccess.php?new\"><button type=\"button\" class=\"btn btn-default\">Create Project</button></a>";
-
 if (isset($_GET['new'])) {
   $tmp = "";
   PrintForm($tmp);
@@ -123,30 +123,30 @@ foreach ($tmp as $row) {
 // Print Form
 function PrintForm($tmp)
 {
+  if (isset($_GET['change'])) echo "<h2>Projekt bearbeiten</h2>";
+  elseif (isset($_GET['new'])) echo "<h2>Projekt erstellen</h2>";
 ?>
-
-<h2>Projekt bearbeiten</h2>
 <form class="form-horizontal" action="dbaccess.php">
   <div class="form-group">
-    <label class="control-label col-sm-2">Name</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="name" value="<?php if (isset($_GET['change'])) echo $tmp->name; ?>">
+    <label class="control-label col-sm-1">Name</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="name" placeholder="Project Name" value="<?php if (isset($_GET['change'])) echo $tmp->name; ?>">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2">Description</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="desc" value="<?php if (isset($_GET['change'])) echo $tmp->description; ?>">
+    <label class="control-label col-sm-1">Description</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="desc" placeholder="Description" value="<?php if (isset($_GET['change'])) echo $tmp->description; ?>">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2">Date</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="date" value="<?php if (isset($_GET['change'])) echo $tmp->createDate; ?>">
+    <label class="control-label col-sm-1">Date</label>
+    <div class="col-sm-4">
+      <input type="<?php if (isset($_GET['new'])) echo "datetime-local"; elseif (isset($_GET['change'])) echo "text"?>" class="form-control" name="date" value="<?php if (isset($_GET['change'])) echo $tmp->createDate; ?>">
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-1 col-sm-10">
       <?php
       if (isset($_GET['change']))
         echo "<button type=\"submit\" name=\"changed\" value=\"".$_GET['change']."\" class=\"btn btn-success\">Aktualisieren</button>";
@@ -157,24 +157,10 @@ function PrintForm($tmp)
     </div>
   </div>
 </form>
-<br>
+<hr>
 
 <?php
 }
-
-// Pagination
-  $page = ceil($items / 20);
-      echo "<nav aria-label=\"Page navigation\">
-        <ul class=\"pagination\">
-        <li class=\"page-item\"><a class=\"page-link\" href=\"?id=first\"><<</a></li>
-        <li class=\"page-item\"><a class=\"page-link\" href=\"?id=prev\"><</a></li>";
-        for ($i=1; $i <= $page; $i++) {
-          echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?id=$i\">$i</a></li>";
-        }
-      echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?id=next\">></a></li>
-      <li class=\"page-item\"><a class=\"page-link\" href=\"?id=last\">>></a></li>
-      </ul></nav>";
-
 ?>
     </div>
   </body>
