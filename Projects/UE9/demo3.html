@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>demo3</title>
+    <style>
+      #para1 {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="para1">Some text!</p>
+    <script>
+    document.getElementById('para1').onclick=changeText;
+    function changeText() {
+      document.getElementById('para1').innerHTML="Some new new new text!";
+    }
+    </script>
+  </body>
+</html>
