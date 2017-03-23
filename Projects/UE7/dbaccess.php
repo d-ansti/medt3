@@ -36,8 +36,8 @@ try {
 }
 
 // Buttons
-echo "<p><a href=\"dbaccess.php?insert\"><button type=\"button\" class=\"btn btn-default\">Renew Table</button></a> ";
-echo "<a href=\"dbaccess.php?new\"><button type=\"button\" class=\"btn btn-default\">Create Project</button></a></p><hr>";
+echo "<p><a href=\"dbaccess.php?insert\"><button type=\"button\" class=\"btn btn-info\">Renew Table</button></a> ";
+echo "<a href=\"dbaccess.php?new\"><button type=\"button\" class=\"btn btn-success\">Create Project</button></a></p><hr>";
 
 // Renew Table
 if (isset($_GET['insert'])) {
