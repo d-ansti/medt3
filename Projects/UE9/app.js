@@ -23,3 +23,11 @@ $("#close").click(function() {
 });
 
 // Example 3
+
+$("#add").click(function() {
+  $("#my-table").append("<tr><td>foo</td><td>bar</td></tr>");
+});
+
+$("#delete").click(function() {
+  $("#my-table tr:last-child").remove();
+});
