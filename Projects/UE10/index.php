@@ -1,3 +1,24 @@
+<?php
+// DB Settings
+$host = 'localhost';
+$dbname = 'medt3';
+$user ='root';
+$pwd = '';
+
+// Establish & check connection
+try {
+   $db = new PDO ("mysql:host=$host;dbname=$dbname", $user, $pwd);
+} catch (PDOException $e) {
+   echo "<h1>Error: " . $e->getMessage()."</h1>";
+   die();
+}
+
+if(isset($_POST["deletepid"])) {
+  echo "Hallo!";
+  exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,28 +38,19 @@
 
 <?php
 
-// DB Settings
-$host = 'localhost';
-$dbname = 'medt3';
-$user ='root';
-$pwd = '';
-
-// Establish & check connection
-try {
-   $db = new PDO ("mysql:host=$host;dbname=$dbname", $user, $pwd);
-} catch (PDOException $e) {
-   echo "<h1>Error: " . $e->getMessage()."</h1>";
-   die();
-}
-
 // SELECT Statement
 $sql = "SELECT * FROM project";
 $res = $db->query($sql);
 $projects = $res->fetchAll(PDO::FETCH_OBJ);
 
 // Show Table
-echo "<h1>Trackstar - Projektübersicht</h1><hr>
-<table class=\"table table-bordered table-hover\">
+?>
+
+<h1>Trackstar - Projektübersicht</h1><hr>
+
+<p id="info-box"></p>
+
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th>ID</th>
@@ -48,7 +60,9 @@ echo "<h1>Trackstar - Projektübersicht</h1><hr>
       <th>Operationen</th>
     </tr>
   </thead>
-  <tbody>";
+  <tbody>
+
+<?php
 
 foreach ($projects as $row) {
   echo "<tr>
@@ -57,8 +71,8 @@ foreach ($projects as $row) {
   <td>" . $row->description . "</td>
   <td>" . $row->createDate . "</td>
   <td>
-    <span class=\"glyphicon glyphicon-pencil change-icon\"></span>
-    <span id=\"$row->id\" class=\"glyphicon glyphicon-trash delete-icon\"></span>
+    <span data-pid=\"$row->id\" class=\"glyphicon glyphicon-pencil change-icon\" style=\"cursor:pointer;\"></span>
+    <span id=\"$row->id\" class=\"glyphicon glyphicon-trash delete-icon\" style=\"cursor:pointer;\"></span>
   </td>";
   echo "</tr>";
 }
