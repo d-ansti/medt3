@@ -1,25 +1,5 @@
 <?php
-// DB Settings
-$host = 'localhost';
-$dbname = 'medt3';
-$user ='root';
-$pwd = '';
-
-// Establish & check connection
-try {
-   $db = new PDO ("mysql:host=$host;dbname=$dbname", $user, $pwd);
-} catch (PDOException $e) {
-   echo "<h1>Error: " . $e->getMessage()."</h1>";
-   die();
-}
-
-// DELETE Statement
-if(isset($_POST["deletepid"])) {
-  echo $_POST["deletepid"];
-  $del = "DELETE FROM project WHERE id = ".$_POST['deletepid'];
-  $db->exec($del);
-  exit;
-}
+require "db.php";
 ?>
 
 <!DOCTYPE html>
@@ -82,6 +62,26 @@ foreach ($projects as $row) {
 
 ?>
     </div>
+
+<!-- Bootstrap Modal Static -->
+
+    <div id="delete-project-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Projekt löschen</h4>
+          </div>
+          <div class="modal-body">
+            <p>Wollen Sie das Projekt wirklich löschen?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+            <button id="delete-project-btn" type="button" class="btn btn-danger">Löschen</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
