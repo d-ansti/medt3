@@ -68,14 +68,14 @@ $projects = $res->fetchAll(PDO::FETCH_OBJ);
 <?php
 
 foreach ($projects as $row) {
-  echo "<tr id='".$row->id."'>
+  echo "<tr id=" . $row->id . ">
   <td>" . $row->id . "</td>
   <td>" . $row->name . "</td>
   <td>" . $row->description . "</td>
   <td>" . $row->createDate . "</td>
   <td>
-    <span data-pid=\"$row->id\" class=\"glyphicon glyphicon-pencil change-icon\" style=\"cursor:pointer;\"></span>
-    <span id=\"$row->id\" class=\"glyphicon glyphicon-trash delete-icon\" style=\"cursor:pointer;\"></span>
+    <span class=\"glyphicon glyphicon-pencil change-icon\" style=\"cursor:pointer;\"></span>
+    <span class=\"glyphicon glyphicon-trash delete-icon\" style=\"cursor:pointer;\"></span>
   </td>";
   echo "</tr>";
 }
