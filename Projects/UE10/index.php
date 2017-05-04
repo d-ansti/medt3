@@ -13,8 +13,11 @@ try {
    die();
 }
 
+// DELETE Statement
 if(isset($_POST["deletepid"])) {
-  echo "Hallo!";
+  echo $_POST["deletepid"];
+  $del = "DELETE FROM project WHERE id = ".$_POST['deletepid'];
+  $db->exec($del);
   exit;
 }
 ?>
@@ -65,7 +68,7 @@ $projects = $res->fetchAll(PDO::FETCH_OBJ);
 <?php
 
 foreach ($projects as $row) {
-  echo "<tr>
+  echo "<tr id='".$row->id."'>
   <td>" . $row->id . "</td>
   <td>" . $row->name . "</td>
   <td>" . $row->description . "</td>

@@ -9,17 +9,17 @@ $(document).ready(function() {
 
     if(confirm("Wollen Sie das Projekt wirklich löschen?")) {
       console.log("Löschen true: " + this.id); // "this" ist das <span>-Element, da an dieses das click-Event gebunden wurde
-
       // Kommunikation mit dem Server aufnehmen, um ihm mitzuteilen, dass das Projekt mit der ID "id" zu löschen ist
 
       var myAjaxConf = {
         url: "http://localhost/medt3/Projects/UE10/",
         method: "POST",
-        data: "deletepid=" + this.id, // vom Typ String
+        data: "deletepid=" + $(this).parent().parent().attr("id"), // vom Typ String
         //data: {deletepid: this.id}  // vom Typ Object
         success: function(serverResponse) {
           console.log("Server response: " + serverResponse);
           if(serverResponse) {
+            $('#'+serverResponse).remove();
             // Tabellenzeile entfernen und Infobox "Löschen erfolgreich" einblenden
             $("#info-box").text("Löschen erfolgreich!").addClass("bg-success").show(300).fadeOut(5000);
           }
