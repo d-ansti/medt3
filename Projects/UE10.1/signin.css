@@ -2,6 +2,7 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
+  text-align: center;
 }
 
 .form-signin {
@@ -43,8 +44,4 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-h1 {
-  text-align: center;
 }

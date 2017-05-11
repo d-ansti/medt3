@@ -44,7 +44,7 @@ try {
 ?>
 <p><a href="project-list.php?insert"><button type="button" class="btn btn-info">Renew Table</button></a>
 <a href="project-list.php?new"><button type="button" class="btn btn-success">Create Project</button></a>
-<a href="project-list.php?logout" style="float: right;"><button type="button" class="btn btn-default">Logout</button></a></p><hr>
+<a href="project-list.php?logout" style="float: right;"><button type="button" class="btn btn-danger">Logout</button></a></p><hr>
 <?php
 // Renew Table
 if (isset($_GET['insert'])) {
