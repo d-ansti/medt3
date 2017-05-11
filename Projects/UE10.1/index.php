@@ -17,22 +17,34 @@
   <body>
 
     <div class="container">
-
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <form class="form-signin" action="index.php" method="post">
+        <h2 class="form-signin-heading">Bitte einloggen</h2>
+        <label for="inputUser" class="sr-only">Username</label>
+        <input type="user" name="inputUser" id="inputUser" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Passwort</label>
+        <input type="password" name="inputPass" id="inputPassword" class="form-control" placeholder="Passwort" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="submitBtn">Log in</button>
       </form>
 
-    </div> <!-- /container -->
+<?php
+$user = "root";
+$pass = "toor";
 
+$message="";
+
+if(isset($_POST["submitBtn"])) {
+  if($_POST["inputUser"] == $user && $_POST["inputPass"] == $pass) {
+    session_start();
+    $_SESSION["user"] = $_POST["inputUser"];
+    header("Location: project-list.php");
+  } else {
+	$message = "Invalid Username or Password!";
+	}
+}
+
+echo "<h1>$message</h1>";
+?>
+
+    </div> <!-- /container -->
   </body>
 </html>
