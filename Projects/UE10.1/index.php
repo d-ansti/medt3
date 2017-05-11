@@ -39,6 +39,10 @@ if(isset($_POST["submitBtn"])) {
 	echo "<h3 class=\"text-danger\">Username oder Passwort falsch!</h3>";
 	}
 }
+
+if(isset($_GET["logout"])) {
+  echo "<h3 class=\"text-success\">Du wurdest ausgeloggt!</h3>";
+}
 ?>
 
     </div> <!-- /container -->
